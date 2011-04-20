@@ -955,11 +955,11 @@ bool MainWidget::savemacierz()
         }
     }
 
-    for( int bb=0; bb < p_render->looplimit; bb++)
+    for( int b=0; b < p_render->looplimit; b++)
     {
-        for( int aa=0; aa < p_render->looplimit; aa++)
+        for( int a=0; a < p_render->looplimit; a++)
         {
-            stopien = p_render->macierzwtemp[bb][aa];
+            stopien = p_render->macierzwtemp[b][a];
             stream << stopien << " ";
         }
         stream << endl;

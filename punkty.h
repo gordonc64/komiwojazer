@@ -46,7 +46,8 @@
 #include <QGraphicsItem>
 #include <math.h>
 #include <QtGui>
-class punkty//: public QGraphicsItem
+
+class punkty
 {
 	
 	public:
@@ -65,7 +66,4 @@ class punkty//: public QGraphicsItem
                 QVector<QPointF>* elipsa(int x, int y, int a, int b, int angle, int steps);
                 QVector<QPointF>* circle_points,*mainpunkty,*liniapunkty,*elipsapunkty;
                 QVector<QPointF>* bok4( int count);
-		//QRectF boundingRect() const;
-		//void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-		//QVector<QPointF>  & returntable() { QVector<QPointF> &reftable = mainpunkty; return reftable; }
 };

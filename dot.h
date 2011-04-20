@@ -23,7 +23,6 @@
 #include <QPainter>
 #include <QStyleOption>
 #include <QGraphicsRectItem>
-//#include <QPointF>
 #include <QRectF>
 #include <QTextItem>
 #include <QGraphicsTextItem>

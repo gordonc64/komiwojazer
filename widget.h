@@ -71,7 +71,6 @@ class MainWidget : public QMainWindow
                 QAction *clearAct;
                 QAction *exitAct;
                 QAction *obliczenia;
-                QRect temp2;
                 QPoint mouse1,mouse2,pos,oldpos;
                 QPointF punkttemp;
                 QPushButton *zaznacz;

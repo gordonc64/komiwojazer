@@ -42,7 +42,6 @@ QRectF dot::boundingRect() const
 
 void dot::movable()
 {
-	//setFlags ( ItemIsMovable | ItemIsSelectable );
 }
 
 void dot::paint ( QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget )
@@ -86,10 +85,7 @@ void dot::paint ( QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
 	painter->setBrush ( gradient );
 	painter->setPen ( QPen ( Qt::black, 0 ) );
 	painter->drawEllipse ( -2, -2, 6, 6 );
-
         painter->scale ( 1.0,-1.0 );
-
         painter->setFont(QFont("Arial", 14));
-        //QRectF textrect (0,0,50.0,50.0);
         painter->drawText(0,10,message);
 }

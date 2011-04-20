@@ -23,15 +23,13 @@
 class Render : public QGraphicsView, public QHoverEvent
 {
 		Q_OBJECT
-                enum swaptype {asymmetric,symmetric, last_swaptype};
+                enum   swaptype   { asymmetric, symmetric, last_swaptype };
                 struct swaprecord {
-                      int x1,x2,y1,y2,z1,z2,gain;
-                      swaptype choice;
-                      };      
+                                    int x1,x2,y1,y2,z1,z2,gain;
+                                    swaptype choice;
+                                  };
 	public:
                 Render ( QWidget *parent );
-		//void punkty(int);
-		//void paintEvent ( QPaintEvent *event );
 		void drawBackground ( QPainter *painter, const QRectF &rect );
 		void polygonfunction ( QVector<QPointF> * );
 		void polygonfunction2 ( QVector<QPointF> * );
@@ -57,22 +55,16 @@ class Render : public QGraphicsView, public QHoverEvent
                 void swapcheck(swaprecord& , QVector<QVector<float> > *);
 
                 QStatusBar *mainwidgetbar;
-                //QRubberBand *rBand;
 		QPolygonF p;
 		QPainterPath path;
                 QPoint pos, oldpos, mousePressScene, mousePressView, mouseLastPosScene, mouseLastPosSceneRelease, mouseLastPosView;
-		//QRect rectBand;
 
                 QVector<QPointF> *polygon;
 		QVector<QPointF> *polygon2;
-                //vector<vector<float> > macierzw;
-                //QVector<QVector<float> > macierzwtemp;
                 QVector<QVector<float> > *macierzw;
-                //QVector<QVector<int> > *macierzwtemp;
                 char macierzwtemp[1000][1000];
                 QVector<dot *> dotslist;
                 QVector<QGraphicsLineItem *> dasline;
-                //QVector<float> floatv;
                 QVector<dot> dots;
                 QVector<int> *trasa;
                 double wagatrasy, wagatrasystart;
@@ -80,21 +72,14 @@ class Render : public QGraphicsView, public QHoverEvent
                 double badaniatimer;
                 double licznik;
                 int looplimit;
-                //int ahead,i,i1,i2,index,j,j1,j2,last,limit,next,s1,s2,t1,t2;
-                //float max,max1;
 
                 QGraphicsScene *scene;
 		QString _text;
 		QPointF test1,test2;
 
-		//QGraphicsRectItem *square;
-		//QRectF obszar;
-		//QVector<QPointF> points;
                 int liczbapunktow,indexrender;
                 int linesize,listsize;
-		//QVector<kwadrat> *objektzaznaczenie;
 
-                //dot tescik;
 		QPoint mouseDownPos;
 		QPoint lastMouseViewPos;
                 QPoint liniaPos2,liniaPos1;
@@ -115,6 +100,7 @@ class Render : public QGraphicsView, public QHoverEvent
                 QGraphicsEllipseItem *qgellipse;
                 QGraphicsRectItem *qgrect;
                 QGraphicsPolygonItem *qgpolygon;
+
         public slots:
 		void punkty_slot ( QString text );
                 void twooptslot();
@@ -124,7 +110,6 @@ class Render : public QGraphicsView, public QHoverEvent
                 void threeoptslotfast();
 
                 void delaunayslot();
-		//void punkty();
 
         signals:
 		void losuj();

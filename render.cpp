@@ -44,10 +44,7 @@ Render::Render ( QWidget *parent ): QHoverEvent(MouseMove, pos, oldpos)
         indexrender=0;
         zaznacz=0;
         pressed=0;
-        //tescik.setVisible ( 0 );
-        //scene->addItem ( &tescik );
 	polygon = new QVector<QPointF>;
-        //dasline = new QVector<QGraphicsLineItem>;
         tourwaga = new double;
         trasa = new QVector<int>;
         qgrect = new QGraphicsRectItem(0, scene);
@@ -57,14 +54,6 @@ Render::Render ( QWidget *parent ): QHoverEvent(MouseMove, pos, oldpos)
         qgellipse = new QGraphicsEllipseItem( 0, scene );
         qgpolygon = new QGraphicsPolygonItem( 0, scene );
         this->viewport()->setMouseTracking(true);
-        /*
-        QGraphicsTextItem* text = new QGraphicsTextItem("1", 0, scene);
-        text->setFont(QFont("Arial", 8));
-        text->moveBy(100,100);
-        //text->rotate(180);
-        text->scale ( 1.0,-1.0 );
-        text->show();
-        */
 }
 
 void Render::HoverEnter( QHoverEvent *evt)
@@ -77,12 +66,7 @@ void Render::mouseMoveEvent ( QMouseEvent* evt )
     mouseLastPosView = evt->pos();
     mouseLastPosScene = mapToScene ( mouseLastPosView ).toPoint();
     QString message("test");
-    //long a = 200;
-    //message.arg(a);
     message = QString("%1,%2").arg(mouseLastPosScene.x()).arg(mouseLastPosScene.y());
-
-    //a++;
-    //message.fromAscii(char1);
     mainwidgetbar->showMessage(message);
     if(zaznacz)
     {
@@ -135,7 +119,6 @@ void Render::mouseMoveEvent ( QMouseEvent* evt )
                 if(qgellipse->isVisible())
                {
                     qgline->hide();
-                    //rubberBand->hide();
                     qgrect->hide();
                     mousePressView = mapFromScene ( mouseDownPos );
                     mouseLastPosView = evt->pos();
@@ -190,7 +173,6 @@ void Render::mouseMoveEvent ( QMouseEvent* evt )
                  rubberRect.setTopLeft ( mouseDownPos );
                  rubberRect.setBottomRight ( mouseLastPosScene );
                  rubberRect = rubberRect.normalized();
-                 //rubberBand->setGeometry ( rubberRect );
                  qgellipse->setRect(rubberRect);
             }
         }
@@ -209,13 +191,6 @@ void Render::mouseMoveEvent ( QMouseEvent* evt )
                     mouseLastPosView = evt->pos();
                     mouseLastPosScene = mapToScene ( mouseLastPosView ).toPoint();
                     qgline->setLine(QLineF(QLine(liniaPos1,mouseLastPosScene)));
-                    //rubberRect.setTopLeft ( mouseDownPos );
-                    //rubberRect.setBottomRight ( mouseLastPosScene );
-                    //rubberRect = rubberRect.normalized();
-
-                    //qgrect->setRect(QRectF(rubberRect));
-                    //test2 = qgrect->rect().bottomLeft();
-                    //qglinebackup->setLine(QLineF(QLine(liniaPos1,test2.toPoint())));
                 }
             }
         break;
@@ -291,8 +266,6 @@ void Render::mousePressEvent ( QMouseEvent* evt )
                 mouseLastPosView = evt->pos();
                 qgrect->setRect (  mouseDownPos.x(),  mouseDownPos.y(), 0,0 );
                 qgrect->show();
-                //rubberBand->setGeometry (  mouseDownPos.x(),  mouseDownPos.y(), 0,0 );
-                //rubberBand->show();
         }
      }
 
@@ -306,8 +279,6 @@ void Render::mousePressEvent ( QMouseEvent* evt )
             mouseLastPosView = evt->pos();
             qgellipse->setRect( mouseDownPos.x(), mouseDownPos.y(), 0,0);
             qgellipse->show();
-            //rubberBand->setGeometry (  mouseDownPos.x(),  mouseDownPos.y(), 0,0 );
-            //rubberBand->show();
         }
     }
     break;
@@ -320,8 +291,6 @@ void Render::mousePressEvent ( QMouseEvent* evt )
            mouseLastPosView = evt->pos();
            qgellipse->setRect( mouseDownPos.x(), mouseDownPos.y(), 0,0);
            qgellipse->show();
-           //rubberBand->setGeometry (  mouseDownPos.x(),  mouseDownPos.y(), 0,0 );
-           //rubberBand->show();
        }
    }
    break;
@@ -336,20 +305,16 @@ void Render::mousePressEvent ( QMouseEvent* evt )
 
                 liniaPos2 = mapToScene ( evt->pos() ).toPoint();
                 qgline->setLine(QLineF(QLine(liniaPos1,liniaPos2)));
-                //qglinebackup->setLine(QLineF(QLine(liniaPos1,test2.toPoint())));
 
             }
             else
             {
                 qgline->show();
                 qglinebackup->show();
-                //qgrect->show();
                 mouseDownPos = mapToScene ( evt->pos() ).toPoint();
                 mouseLastPosView = evt->pos();
-                //qgrect->setRect (  mouseDownPos.x(),  mouseDownPos.y(), 0,0 );
                 liniaPos1 = mapToScene ( evt->pos() ).toPoint();
                 qgline->setLine(QLineF(QLine(liniaPos1,liniaPos1)));
-                //qglinebackup->setLine(QLineF(QLine(liniaPos1,liniaPos1)));
                 pressed=1;
 
             }
@@ -388,31 +353,22 @@ void Render::mousePressEvent ( QMouseEvent* evt )
 void Render::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     Q_UNUSED(event);
-    //QMenu menu;
-    //QAction *removeAction = menu.addAction("Remove");
 }
 
 void Render::polygonfunction ( QVector<QPointF> *temp )
 {
-        //polygon = temp;
 }
 
 void Render::polygonfunction2 ( QVector<QPointF> *temp )
 {
-        //polygon->clear();
 	polygon2 = temp;
         int vsize = polygon2->size();
         dot *test2 = new dot[vsize];
-        //dots.clear();
         for ( int i=0 ;i < vsize ;i++ )
 	{
 		QPointF w2 = ( *polygon2 ).at ( i );
-                //dot punktw;
-                //dots.push_back(punktw);
                 test2[i].setPos ( w2 );
                 test2[i].flaga = 1;
-                //test2[i].message = QString("%1").arg(i);
-                //dots.at(i).setPos(w2);
                 scene->addItem ( &test2[i] );
         };
 
@@ -447,7 +403,6 @@ void Render::twooptslotfast()
     delaunay(polygon);
     twooptfast(listsize, macierzw, trasa);
     badaniatimer = licznik;
-    //twoopt(listsize, macierzw, trasa);
     wagatrasy = 0.0;
     QPointF start,end;
     float x,y,x2,y2;
@@ -697,7 +652,6 @@ void Render::threeoptslotfast()
     }
     delaunay(polygon);
     threeoptfast(listsize, macierzw, trasa);
-    //threeopt(listsize, macierzw, trasa);
     badaniatimer = licznik;
     wagatrasy = 0.0;
     QPointF start,end;
@@ -761,7 +715,6 @@ void Render::threeoptslotfast()
 
 void Render::delaunayslot()
 {
-    //QPointF punkt_test;
     polygon->clear();
     foreach(QGraphicsItem *item, scene->items())
     {
@@ -780,8 +733,6 @@ void Render::delaunayslot()
             else
             {
                 *polygon << dots->pos();
-                //punkt_test = dots->pos();
-                //qDebug() << punkt_test;
             }
         }
     }
@@ -813,85 +764,24 @@ void Render::delaunayplot( QVector<QPointF> *temp )
         int o=0;
         while(vdg.getNextDelaunay(x1,y1,x2,y2))
         {
-                //printf("GOT Line (%f,%f)->(%f,%f)\n",x1,y1,x2, y2);
                 QPointF w1(x1,y1);
                 QPointF w2(x2,y2);
                 dasline << new QGraphicsLineItem(QLineF(w1,w2));
                 scene->addItem ( dasline.at(o));
                 dasline.at(o)->show();
                 o++;
-        }
-        /*
-        for ( int i=0 ;i < vsize ;i++ )
-        {
-                QPointF w2 = ( *polygon2 ).at ( i );
-                Dt += new point ( (double)w2.x(), (double)w2.y() );
-        };
-
-        dasline.clear();
-        Dt.output();
-        polygon2 = Dt.tablicapunktow;
-        vsize = polygon2->size();
-
-        for ( int i=0,j=0 ;i < vsize ;i++,j++ )
-        {
-                QPointF w1 = ( *polygon2 ).at ( i );
-                i++;
-                QPointF w2 = ( *polygon2 ).at ( i );
-                dasline << new QGraphicsLineItem(QLineF(w1,w2));
-                scene->addItem ( dasline.at(j));
-                dasline.at(j)->show();
-        };
-
-        //macierzwag();
-        //fitsp(listsize,0,4000,macierzw,trasa,tourwaga);
-        //wagatrasystart = *tourwaga;
-        //twooptfast(listsize, macierzw, trasa);
-        //threeoptfast(listsize, macierzw, trasa);
-        //twooptfast(listsize, macierzw, trasa);
-        //twoopt(listsize, macierzw, trasa);
-        int y = dotslist.size();
-        int p;
-
-
-        for(int e=0; e < y-1; e++)
-        {
-            if(e==y-2)
-            {
-                QPointF e1 = dotslist.at(trasa->at(e))->pos();
-                QPointF e2 = dotslist.at(trasa->at(e+1))->pos();
-                scene->addLine(QLineF(e1,e2));
-                e1 = dotslist.at(trasa->at(e+1))->pos();
-                e2 = dotslist.at(trasa->at(0))->pos();
-                scene->addLine(QLineF(e1,e2));
-            }
-            else
-            {
-                QPointF e1 = dotslist.at(trasa->at(e))->pos();
-                p=e; p++;
-                QPointF e2 = dotslist.at(trasa->at(p))->pos();
-                scene->addLine(QLineF(e1,e2));
-            }
-
-        }
-        */
-
-        //qgpolygon->show();
+        }       
 }
 
 void Render::delaunay( QVector<QPointF> *temp )
 {
-
         for(int bla=0; bla < looplimit; bla++)
         {
             for(int bla2=0; bla2 < looplimit; bla2++)
             {
                 macierzwtemp[bla][bla2] = 0;
-                //printf("%i ",tempbla);
-                //qDebug() << tempbla << " ";
+
             }
-            //printf("\n");
-            //qDebug() <<  endl;
         }
         Delaunay_tree Dt;
         dasline.clear();
@@ -907,37 +797,7 @@ void Render::delaunay( QVector<QPointF> *temp )
             yValues[i]=punkt.y();
             listapunktow << punkt;
         }
-        /*
-        VoronoiDiagramGenerator vdg;
-        vdg.generateVoronoi(xValues,yValues,vsize, -100,100,-100,100,3);
 
-        vdg.resetIterator();
-        vdg.resetDelaunayEdgesIterator();
-        float x1,y1,x2,y2;
-        int o=0;
-        //qDebug() << "narf 1";
-        while(vdg.getNextDelaunay(x1,y1,x2,y2))
-        {
-                //printf("GOT Line (%f,%f)->(%f,%f)\n",x1,y1,x2, y2);
-                QPointF w1(x1,y1);
-                QPointF w2(x2,y2);
-                int count = 0;
-                foreach(QPointF temppoint, listapunktow)
-                {
-                    if(temppoint == w1 )
-                        //qDebug() << "narf 2";
-                    if(temppoint == w2 )
-                        //qDebug() << "narf 2";
-                    count++;
-
-
-                }
-                dasline << new QGraphicsLineItem(QLineF(w1,w2));
-                scene->addItem ( dasline.at(o));
-                dasline.at(o)->show();
-                o++;
-        }
-        */
         for ( int i=0 ;i < vsize ;i++ )
         {
                 QPointF w2 = ( *polygon2 ).at ( i );
@@ -957,9 +817,7 @@ void Render::delaunay( QVector<QPointF> *temp )
                 QPointF w1 = ( *polygon2 ).at ( i );
                 i++;
                 QPointF w2 = ( *polygon2 ).at ( i );
-                //dasline << new QGraphicsLineItem(QLineF(w1,w2));
                 int count = 0;
-                //int w1count = 0;
 
                 foreach(QPointF temppoint, listapunktow)
                 {
@@ -972,8 +830,6 @@ void Render::delaunay( QVector<QPointF> *temp )
                             {
                                 macierzwtemp[count][w2count]=1;
                                 macierzwtemp[w2count][count]=1;
-                                //qDebug() << "   1 ";
-
                             }
                             w2count++;
                         }
@@ -987,80 +843,17 @@ void Render::delaunay( QVector<QPointF> *temp )
                             {
                                 macierzwtemp[count][w1count]=1;
                                 macierzwtemp[w1count][count]=1;
-                                //qDebug() << "   1 ";
                             }
                             w1count++;
                         }
                     }
                     count++;
                 }
-                //scene->addItem ( dasline.at(j));
-                //dasline.at(j)->show();
         }
 
-        /*
-        for(int bbb=0; bbb < looplimit; bbb++ )
-        {
-           macierzwtemp[bbb][bbb]=0;
-        }
-
-        for( int b=0; b < looplimit; b++ )
-        {
-            for( int a=0; a < looplimit; a++)
-            {
-                if(macierzwtemp[b][a]==1)
-                {
-                    for(int p=0; p < looplimit; p++  )
-                    {
-                        if(macierzwtemp[a][p]==1 && !p==b)
-                        {
-                            if(macierzwtemp[b][p]==0)
-                            {
-                                macierzwtemp[b][a]=2;
-                                macierzwtemp[a][b]=2;
-                            }
-                        }
-                    }
-                }
-            }
-
-        }
-
-        for(int bbbb=0; bbbb < looplimit; bbbb++ )
-        {
-            macierzwtemp[bbbb][bbbb]=0;
-        }
-
-        for( int thirdb=0; thirdb < looplimit; thirdb++ )
-        {
-            for( int thirda=0; thirda < looplimit; thirda++)
-            {
-                if(macierzwtemp[thirdb][thirda]==2)
-                {
-                    for(int thirdp=0; thirdp < looplimit; thirdp++  )
-                    {
-                        if(macierzwtemp[thirda][thirdp]==2 && !thirdp==thirdb)
-                        {
-
-                            if(macierzwtemp[thirdb][thirdp]==0)
-                            {
-                                macierzwtemp[thirdb][thirdp]=3;
-                                macierzwtemp[thirdp][thirdb]=3;
-                            }
-                        }
-                    }
-                }
-            }
-
-        }
-
-
-        */
         bool goloop=1;
         int first=1;
         int second=2;
-
-
         while(goloop)
         {
             goloop = 0;
@@ -1085,7 +878,6 @@ void Render::delaunay( QVector<QPointF> *temp )
                     }
                 }
              }
-
              stopien = first;
              if( goloop==1 )
              {
@@ -1093,46 +885,9 @@ void Render::delaunay( QVector<QPointF> *temp )
                 second++;
              }
         }
-
-        //for(int bbo=0; bbo < looplimit; bbo++ )
-        {
-            //macierzwtemp[bbo][bbo]=0;
-        }
-
         macierzwag();
         fitsp(listsize,0,5000,macierzw,trasa,tourwaga);
         wagatrasystart = *tourwaga;
-        //twooptfast(listsize, macierzw, trasa);
-        //threeoptfast(listsize, macierzw, trasa);
-        //twooptfast(listsize, macierzw, trasa);
-        //twoopt(listsize, macierzw, trasa);
-        //int y = dotslist.size();
-        //int p;
-
-        /*
-        for(int e=0; e < y-1; e++)
-        {
-            if(e==y-2)
-            {
-                QPointF e1 = dotslist.at(trasa->at(e))->pos();
-                QPointF e2 = dotslist.at(trasa->at(e+1))->pos();
-                scene->addLine(QLineF(e1,e2));
-                e1 = dotslist.at(trasa->at(e+1))->pos();
-                e2 = dotslist.at(trasa->at(0))->pos();
-                scene->addLine(QLineF(e1,e2));
-            }
-            else
-            {
-                QPointF e1 = dotslist.at(trasa->at(e))->pos();
-                p=e; p++;
-                QPointF e2 = dotslist.at(trasa->at(p))->pos();
-                scene->addLine(QLineF(e1,e2));
-            }
-
-        }
-        */
-
-        //qgpolygon->show();
 }
 
 void Render::swapcheck(swaprecord& zamiana, QVector<QVector<float> > *macierzwag)
@@ -1232,8 +987,6 @@ void Render::threeoptfast( int iloscmiast, QVector<QVector<float> > *macierzwag,
    }
    //stoper.stopTimer();
    //licznik = stoper.getElapsedTime();
-   //printf("%f \n",licznik);
-   //cout << licznik << endl;
 }
 
 void Render::threeopt( int nn, QVector<QVector<float> > *wb, QVector<int> *routeb)
@@ -1295,8 +1048,6 @@ void Render::threeopt( int nn, QVector<QVector<float> > *wb, QVector<int> *route
    }
    //stoper.stopTimer();
    //licznik = stoper.getElapsedTime();
-   //printf("%f \n",licznik);
-   //cout << licznik << endl;
 }
 
 void Render::twooptfast( int iloscmiast, QVector<QVector<float> > *macierzwag,QVector<int> *trasapoczatkowa)
@@ -1357,8 +1108,6 @@ void Render::twooptfast( int iloscmiast, QVector<QVector<float> > *macierzwag,QV
     }
     //stoper.stopTimer();
     //licznik = stoper.getElapsedTime();
-    //printf("%f \n",licznik);
-    //cout << licznik << endl;
 }
 
 void Render::twoopt( int nc, QVector<QVector<float> > *wc,QVector<int> *routec)
@@ -1422,14 +1171,11 @@ void Render::twoopt( int nc, QVector<QVector<float> > *wc,QVector<int> *routec)
     }
     //stoper.stopTimer();
     //licznik = stoper.getElapsedTime();
-    //printf("%f \n",licznik);
-    //cout << licznik << endl;
 }
 
 void Render::macierzwag()
 {
     linesize=dasline.size();
-    //QLineF linef;
     QPointF start,end;
     float x,y,x2,y2,waga;
     dotslist.clear();
@@ -1460,79 +1206,7 @@ void Render::macierzwag()
         (*macierzw)[f][g] = waga;
        }
      }
-    }
-
-
-        //macierzwtemp = new QVector<QVector<int> >(listsize,QVector<int>(listsize,0));
-
-        //int macierzsasiadow[listsize][listsize];
-        /*
-        for(int bla=0; bla < 50; bla++)
-        {
-            for(int bla2=0; bla2 < 50; bla2++)
-            {
-                macierzwtemp[bla][bla2] = false;
-                //printf("%i ",tempbla);
-                //qDebug() << tempbla << " ";
-            }
-            //printf("\n");
-            //qDebug() <<  endl;
-        }
-        */
-        /*
-        for(int g=0; g < linesize; g++)
-        {
-            for(int h=0; h < listsize; h++)
-            {
-                if(start == dotslist.at(h)->pos() || end == dotslist.at(h)->pos() )
-                {
-                    if( start == dotslist.at(h)->pos() )
-                    {                        
-                        for(int j=0; j < listsize;j++)
-                        {
-                            if(end == dotslist.at(j)->pos())
-                            {
-                                macierzwtemp[h][j] = true;
-                                macierzwtemp[j][h] = true;
-                                j = listsize;
-                                h = listsize;
-                                qDebug() << "narf 1";
-                            }
-                        }
-                    }
-                    else
-                    {
-                        for(int j=0; j < listsize;j++)
-                        {
-                            if(start == dotslist.at(j)->pos())
-                            {
-                                macierzwtemp[j][h] = true;
-                                macierzwtemp[h][j] = true;
-                                j = listsize;
-                                h = listsize;
-                                qDebug() << "narf 2";
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        */
-
-        /*
-        for(int bla=0; bla < listsize; bla++)
-        {
-            for(int bla2=0; bla2 < listsize; bla2++)
-            {
-                int tempbla = macierzsasiadow[bla][bla2];
-                //printf("%i ",tempbla);
-                qDebug() << tempbla << " ";
-            }
-            //printf("\n");
-            qDebug() <<  endl;
-        }
-        */
-
+    }     
 }
 
 void Render::fitsp( int iloscmiast,int punktstartowy,float najwiekszawartoscpolaczenia,
@@ -1542,7 +1216,6 @@ void Render::fitsp( int iloscmiast,int punktstartowy,float najwiekszawartoscpola
    int index=0,nextindex=0,farthest=0,i=0,j=0,end1=0,end2=0;
    QVector<int> cycle (iloscmiast,0);
    QVector<float> *dist = new QVector<float>(iloscmiast,0);
-   //macierzwag->clear();
    trasa->clear();
    trasa->resize(iloscmiast);
 
@@ -1593,56 +1266,6 @@ void Render::fitsp( int iloscmiast,int punktstartowy,float najwiekszawartoscpola
 void Render::macierzwag2(QList<dot*> tempdot)
 {
     Q_UNUSED(tempdot);
-    /*
-    macierzw.clear();
-    dotslist.clear();
-    foreach(QGraphicsItem *item, scene->items())
-    {
-        if( dot *dots = qgraphicsitem_cast<dot *>(item) )
-        {
-            if(dots->isVisible())
-                dotslist << dots;
-        }
-    }
-    int vsize = dotslist.size();
-
-    bool done=1;
-    int i=0;
-    int b=0;
-    double x,y,x1,y1;
-    for(int kk=0; kk <  vsize; kk++)
-    {
-        done=1;
-        while( done )
-        {
-           foreach(QPointF pointloop, Dt.tablicapunktow )
-           {
-
-            if( dotslist.at(kk)->pos() == pointloop )
-            {
-              for(int ww=0; ww < vsize; ww++)
-              {
-                if(ww=kk) macierzw[kk][ww]= -1;
-
-                if(i==0)
-                {
-                    b=i; b++;
-                    x=dotslist.at(kk)->pos().x();
-                    y=dotslist.at(kk)->pos().y();
-                    x1=Dt.tablicapunktow->at(i).x();
-                    y1=Dt.tablicapunktow->at(i).y();
-                    macierzw[kk][ww]=sqrt( ((x-x1)*(x-x1)) + ((y-y1)*(y-y1)) );
-                }
-                done=0;
-              }
-              i++;
-            }
-           }
-           done=0;
-
-        }
-    }
-    */
 }
 
 void Render::drawBackground ( QPainter *painter, const QRectF &rect )
