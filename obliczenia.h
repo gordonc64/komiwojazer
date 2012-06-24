@@ -53,7 +53,7 @@ class obliczenia: public QThread
 {
         public:
             obliczenia();
-
+            void run();
 };
 
 #endif // OBLICZENIA_H

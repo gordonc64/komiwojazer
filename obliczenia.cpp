@@ -25,3 +25,12 @@ obliczenia::obliczenia()
 {
 
 }
+
+void obliczenia::run()
+{
+    QTcpSocket socket;
+    // connect QTcpSocket's signals somewhere meaningful
+
+    socket.connectToHost(hostName, portNumber);
+    exec();
+}
