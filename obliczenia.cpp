@@ -25,3 +25,15 @@ obliczenia::obliczenia()
 {
 
 }
+
+void obliczenia::run()
+{
+
+    exec();
+}
+
+void obliczenia::calc()
+{
+
+
+}

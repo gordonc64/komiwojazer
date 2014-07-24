@@ -1,2 +1,3 @@
-1# started code clean up.
-2# test run
+#1 started code clean up.
+#2 test run
+#3 adding project file to gitignore
