@@ -45,6 +45,7 @@
 #include <stdio.h>
 
 //#include "hr_time.h"
+
 #include "punkty.h"
 #include "delaunay_tree_2d.h"
 #include "dot.h"
