@@ -28,10 +28,18 @@ obliczenia::obliczenia()
 
 void obliczenia::run()
 {
+
     exec();
 }
 
 void obliczenia::calc()
 {
+
+
+    QTcpSocket socket;
+    // connect QTcpSocket's signals somewhere meaningful
+
+    //socket.connectToHost(hostName, portNumber);
+    //exec();
 
 }

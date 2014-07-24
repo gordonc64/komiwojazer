@@ -43,9 +43,9 @@
 #include <QDebug>
 #include <iostream>
 #include <stdio.h>
+#include <QtNetwork/qtcpsocket.h>
 
 //#include "hr_time.h"
-
 #include "punkty.h"
 #include "delaunay_tree_2d.h"
 #include "dot.h"
